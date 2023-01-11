@@ -1,7 +1,5 @@
 package dev.mentoria.lojavirtual.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,19 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
+
 @Entity
-@Table(name = "marca_produto")
-@SequenceGenerator(name = "seq_marca_produto", sequenceName = "seq_marca_produto", allocationSize = 1, initialValue = 1)
-public class MarcaProduto implements Serializable {
+@Table(name = "acesso")
+@SequenceGenerator(name = "seq_acesso", sequenceName = "seq_acesso", initialValue = 1, allocationSize = 1)
+public class Acesso implements GrantedAuthority{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_acesso")
 	private Long id;
 	
-	@Column(name = "nome_desc", nullable = false)
-	private String nomeDesc;
+	@Column(nullable = false)
+	private String descricao; /*Acesso ex: ROLE-ADMIN ou ROLE_SECRETARIO*/
+	
+	@Override
+	public String getAuthority() {	
+		return this.descricao;
+	}
 
 	public Long getId() {
 		return id;
@@ -32,12 +38,12 @@ public class MarcaProduto implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeDesc() {
-		return nomeDesc;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNomeDesc(String nomeDesc) {
-		this.nomeDesc = nomeDesc;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -56,7 +62,7 @@ public class MarcaProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MarcaProduto other = (MarcaProduto) obj;
+		Acesso other = (Acesso) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -64,5 +70,7 @@ public class MarcaProduto implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 
 }
