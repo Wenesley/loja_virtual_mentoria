@@ -24,6 +24,8 @@ public class AvaliacaoProduto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_avaliacao_produto")
 	private Long id;
 	
+	private String descricao;
+	
 	private Integer nota;
 	
 	@ManyToOne(targetEntity = Pessoa.class)
@@ -42,6 +44,14 @@ public class AvaliacaoProduto implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}	
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Integer getNota() {
