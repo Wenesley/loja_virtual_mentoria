@@ -25,7 +25,7 @@ public class AvaliacaoProduto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_avaliacao_produto")
 	private Long id;
 	
-	@Column(name = "nome_desc", nullable = false)
+	@Column(nullable = false)
 	private String descricao;
 	
 	@Column(nullable = false)
